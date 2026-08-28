@@ -1,0 +1,57 @@
+name: Update SideStore Source
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-json:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch Latest Nuvio Release and Update apps.json
+        run: |
+          RELEASE_DATA=$(curl -s https://api.github.com/repos/NuvioMedia/NuvioMobile/releases/latest)
+          
+          VERSION=$(echo "$RELEASE_DATA" | jq -r '.tag_name' | sed 's/^v//')
+          DATE=$(echo "$RELEASE_DATA" | jq -r '.published_at' | cut -d'T' -f1)
+          IPA_URL=$(echo "$RELEASE_DATA" | jq -r '.assets[] | select(.name | endswith(".ipa")) | .browser_download_url' | head -n 1)
+          SIZE=$(echo "$RELEASE_DATA" | jq -r '.assets[] | select(.name | endswith(".ipa")) | .size' | head -n 1)
+
+          if [ -z "$IPA_URL" ] || [ "$IPA_URL" == "null" ]; then
+            echo "No .ipa asset found in the latest release."
+            exit 0
+          fi
+
+          cat <<EOF > apps.json
+          {
+            "name": "Nuvio Auto Source",
+            "identifier": "com.nuvio.autosource",
+            "apps": [
+              {
+                "name": "Nuvio",
+                "bundleIdentifier": "com.nuvio.media",
+                "developerName": "NuvioMedia",
+                "version": "$VERSION",
+                "versionDate": "$DATE",
+                "versionDescription": "Automated build for version $VERSION.",
+                "downloadURL": "$IPA_URL",
+                "iconURL": "https://raw.githubusercontent.com/luqmanfadlli/NuvioMobile-iOS/main/icon.png",
+                "localizedDescription": "Official Nuvio media client for iOS.",
+                "size": $SIZE
+              }
+            ]
+          }
+          EOF
+
+      - name: Commit and Push Changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add apps.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update source to $VERSION" && git push)
