@@ -1,5 +1,18 @@
 {
   "name": "Nuvio Auto Source",
   "identifier": "com.nuvio.autosource",
-  "apps": []
+  "apps": [
+    {
+      "name": "Nuvio",
+      "bundleIdentifier": "com.nuvio.media",
+      "developerName": "NuvioMedia",
+      "version": "0.4.11",
+      "versionDate": "2026-08-26",
+      "versionDescription": "Automated build for version 0.4.11.",
+      "downloadURL": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.4.11/nuvio-0.4.11-full-release.ipa",
+      "iconURL": "https://raw.githubusercontent.com/luqmanfadlli/NuvioMobile-iOS/main/icon.png",
+      "localizedDescription": "Official Nuvio media client for iOS.",
+      "size": 51638510
+    }
+  ]
 }
