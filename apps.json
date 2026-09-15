@@ -6,13 +6,13 @@
       "name": "Nuvio",
       "bundleIdentifier": "com.nuvio.media",
       "developerName": "NuvioMedia",
-      "version": "0.4.20",
-      "versionDate": "2026-09-14",
-      "versionDescription": "Automated build for version 0.4.20.",
-      "downloadURL": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.4.20/nuvio-0.4.20-full-release.ipa",
+      "version": "0.4.21",
+      "versionDate": "2026-09-15",
+      "versionDescription": "Automated build for version 0.4.21.",
+      "downloadURL": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.4.21/nuvio-0.4.21-full-release.ipa",
       "iconURL": "https://raw.githubusercontent.com/luqmanfadlli/NuvioMobile-iOS/main/icon.png",
       "localizedDescription": "Official Nuvio media client for iOS.",
-      "size": 51167786
+      "size": 51231186
     }
   ]
 }
