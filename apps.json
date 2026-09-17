@@ -6,7 +6,7 @@
       "name": "Nuvio",
       "bundleIdentifier": "com.nuvio.media",
       "developerName": "NuvioMedia",
-      "version": "0.4.22-beta",
+      "version": "0.4.22",
       "versionDate": "2026-09-16",
       "versionDescription": "Automated build for version 0.4.22-beta.",
       "downloadURL": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.4.22-beta/nuvio-0.4.22-full-release.ipa",
